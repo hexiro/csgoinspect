@@ -10,7 +10,7 @@ from functools import lru_cache
 from loguru import logger
 from redis.asyncio import Redis
 
-from csinspect.config import DEV_MODE, REDIS_DATABASE, REDIS_EX, REDIS_HOST, REDIS_PASSWORD, REDIS_PORT, SILENT_MODE
+from csinspect.config import REDIS_DATABASE, REDIS_EX, REDIS_HOST, REDIS_PASSWORD, REDIS_PORT
 from csinspect.typings import TweetResponseState
 
 if t.TYPE_CHECKING:
@@ -49,4 +49,3 @@ async def update_tweet_state(tweet: TweetWithInspectLink, *, successful: bool) -
             data["failed_attempts"] = state.failed_attempts + 1
 
     await redis_.set(name=f"tweet:{tweet.id}", value=json.dumps(data), ex=REDIS_EX)
-

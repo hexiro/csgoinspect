@@ -66,7 +66,7 @@ class CSInspect:
 
         inspect_link_tweets = await asyncio.gather(*tasks)
         filtered_inspect_link_tweets = [t for t in inspect_link_tweets if t is not None]
-        
+
         return filtered_inspect_link_tweets
 
     async def run(self: CSInspect) -> None:
@@ -168,7 +168,7 @@ class CSInspect:
 
         async with self.lock:
             items = tuple(Item(inspect_link=match.group()) for match in matches)
-            
+
             tweet_with_items = TweetWithInspectLink(items, tweet)
             tweet_state = await redis_.tweet_state(tweet_with_items)
 

@@ -17,7 +17,7 @@
 
 <h2>Screenshot Tools</h2>
 <ul>
-  <li><a href="https://swap.gg/screenshot" target="_blank" rel="norefferer">swap.gg</a></li>
+  <li><a href="https://screenshot.skinport.com" target="_blank" rel="norefferer">Skinport</a><li>
 </ul>
 
 <br/>
