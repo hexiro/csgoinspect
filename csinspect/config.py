@@ -41,7 +41,10 @@ TWITTER_INSPECT_URL_REGEX: t.Final = re.compile(
 TWEET_EXPANSIONS: t.Final = ["author_id", "attachments.media_keys"]
 TWEET_TWEET_FIELDS: t.Final = ["id", "text", "attachments", "conversation_id"]
 TWEET_USER_FIELDS: t.Final = ["id", "name", "username"]
-TWEET_MAX_IMAGES: t.Final = 4
+# tweets can be many characters now and Twitter allows more than 4 images
+# 8 feels like a safe max (which will rarely be reached)
+# but will adjusted if needed
+TWEET_MAX_IMAGES: t.Final = 8
 TWEET_MAX_FAILED_ATTEMPTS: t.Final = int(os.getenv("TWEET_MAX_FAILED_ATTEMPTS", default=25))
 TWEET_SEARCH_DELAY: t.Final = int(os.getenv("TWEET_SEARCH_DELAY", default=60 * 2))
 
