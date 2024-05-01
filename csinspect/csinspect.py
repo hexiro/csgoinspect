@@ -156,7 +156,9 @@ class CSInspect:
         matches = matches[:TWEET_MAX_IMAGES]
 
         if not matches:
-            logger.info(f"SKIPPING TWEET (No Inspect Links): {tweet.id} ")
+            # sometimes bc the tweet actually contains a demo link
+            # sometimes bc the tweet is a retweet and is truncated (the original will be queried)
+            logger.info(f"SKIPPING TWEET (No Inspect Links): {tweet.id}")
             return None
 
         if DEV_MODE and tweet.author_id != DEV_ID:
