@@ -22,6 +22,7 @@ ENABLE_TWITTER_LIVE: t.Final = os.getenv("ENABLE_TWITTER_LIVE", default="true").
 
 # --- other modes ---
 DEV_MODE: t.Final = os.getenv("DEV_MODE", default="false").lower() == "true"
+DEBUG_LOGGING: t.Final = os.getenv("DEBUG_LOGGING", default="false").lower() == "true"
 DEV_ID: t.Final = int(os.environ["DEV_ID"]) if DEV_MODE else None
 # don't send tweets
 SILENT_MODE: t.Final = os.getenv("SILENT_MODE", default="false").lower() == "true"
