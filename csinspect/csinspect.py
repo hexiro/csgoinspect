@@ -22,6 +22,7 @@ from csinspect.config import (
     TWEET_USER_FIELDS,
     TWITTER_INSPECT_LINK_QUERY,
     TWITTER_INSPECT_URL_REGEX,
+    TWITTER_INSPECT_URL_TEMPLATE,
     TWITTER_LIVE_RULES,
 )
 from csinspect.item import Item
@@ -151,6 +152,17 @@ class CSInspect:
             task_set.add(task)
             task.add_done_callback(task_set.discard)
 
+    def parse_match(self: CSInspect, match: re.Match) -> str:
+        group_dict = match.groupdict()
+
+        s = group_dict.get("S")
+        m = group_dict.get("M")
+        a = group_dict.get("A")
+        d = group_dict.get("D")
+
+        inspect_link = TWITTER_INSPECT_URL_TEMPLATE.format(s or m, a, d)
+        return inspect_link
+
     async def parse_tweet(self: CSInspect, tweet: tweepy.Tweet) -> TweetWithInspectLink | None:
         matches: list[re.Match] = list(TWITTER_INSPECT_URL_REGEX.finditer(tweet.text))
         matches = matches[:TWEET_MAX_IMAGES]
@@ -169,7 +181,7 @@ class CSInspect:
             return None
 
         async with self.lock:
-            items = tuple(Item(inspect_link=match.group()) for match in matches)
+            items = tuple(Item(inspect_link=self.parse_match(match)) for match in matches)
 
             tweet_with_items = TweetWithInspectLink(items, tweet)
             tweet_state = await redis_.tweet_state(tweet_with_items)
