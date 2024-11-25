@@ -22,7 +22,7 @@ mypy = "^1.11.2"
 isort = "^5.13.2"
 black = "^24.8.0"
 types-redis = "^4.6.0.20240819"
-ruff = "^0.6.2"
+ruff = "^0.8.0"
 
 [build-system]
 requires = ["poetry-core"]
