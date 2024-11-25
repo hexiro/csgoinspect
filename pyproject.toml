@@ -14,7 +14,7 @@ redis = "^5.0.8"
 python-dotenv = "^1.0.1"
 loguru = "^0.7.2"
 sentry-sdk = "^2.13.0"
-aiohttp = "^3.10.5"
+aiohttp = "^3.11.7"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"
